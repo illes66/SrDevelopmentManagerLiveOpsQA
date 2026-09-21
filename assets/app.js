@@ -187,8 +187,10 @@ function normalizeHeaderKey(value) {
 }
 
 function parseExpertiseLevel(value) {
-  const match = String(value || '').match(/[1-5]/);
-  return match ? Number(match[0]) : 0;
+  const match = String(value || '')
+    .trim()
+    .match(/^([1-5])(?:\b|\/\s*5\b|$)/);
+  return match ? Number(match[1]) : 0;
 }
 
 function parseBoolean(value) {
@@ -311,15 +313,7 @@ function normalizeRequirementsData(rows) {
   ]);
   const nextStepIndex = getHeaderIndex(headerMap, ['Next step to improve', 'Next Step to Improve']);
 
-  const requiredIndexes = [
-    requirementIndex,
-    relatedExperienceIndex,
-    companyIndex,
-    expertiseIndex,
-    improvementIndex,
-    nextStepIndex,
-    matchIndex
-  ];
+  const requiredIndexes = [requirementIndex, relatedExperienceIndex, companyIndex, expertiseIndex, matchIndex];
 
   if (requiredIndexes.some((index) => typeof index !== 'number' || index < 0)) {
     return [];
@@ -340,8 +334,8 @@ function normalizeRequirementsData(rows) {
         company: String(row[companyIndex] || '').trim(),
         expertiseLevel: parseExpertiseLevel(expertiseLabel),
         expertiseLabel: expertiseLabel || `${parseExpertiseLevel(expertiseLabel)} / 5`,
-        improvement: String(row[improvementIndex] || '').trim(),
-        nextStep: String(row[nextStepIndex] || '').trim()
+        improvement: improvementIndex >= 0 ? String(row[improvementIndex] || '').trim() : '',
+        nextStep: nextStepIndex >= 0 ? String(row[nextStepIndex] || '').trim() : ''
       };
     })
     .filter(Boolean);
@@ -682,7 +676,7 @@ function updateDataState(source, message) {
       source === 'live'
         ? 'This chart is powered by the live public Google Sheets CSV.'
         : source === 'fallback'
-          ? 'This chart is currently showing the normalized local fallback dataset because the live CSV could not be loaded.'
+          ? 'This chart is currently showing the normalized local fallback dataset because the live CSV could not be loaded or did not match the expected structure.'
           : 'Loading the live public Google Sheets CSV.';
   }
 }
@@ -710,7 +704,7 @@ async function loadRequirementsData() {
     state.requirements = LOCAL_REQUIREMENTS_DATA;
     updateDataState(
       'fallback',
-      'Displaying local fallback data because the live Google Sheets CSV could not be loaded.'
+      'Displaying local fallback data because the live Google Sheets CSV could not be loaded or did not match the expected structure.'
     );
   }
 
