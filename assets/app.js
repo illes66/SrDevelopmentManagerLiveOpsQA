@@ -180,9 +180,10 @@ let expertiseChart;
 function normalizeHeaderKey(value) {
   return String(value || '')
     .replace(/\uFEFF/g, '')
-    .replace(/\s+/g, ' ')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '')
     .trim()
-    .toLowerCase();
+    ;
 }
 
 function parseExpertiseLevel(value) {
@@ -268,6 +269,17 @@ function findMatchColumnIndex(headers, rows) {
   );
 }
 
+function getHeaderIndex(headerMap, aliases) {
+  for (const alias of aliases) {
+    const index = headerMap.get(normalizeHeaderKey(alias));
+    if (typeof index === 'number') {
+      return index;
+    }
+  }
+
+  return -1;
+}
+
 function normalizeRequirementsData(rows) {
   if (!Array.isArray(rows) || rows.length < 2) {
     return [];
@@ -280,12 +292,24 @@ function normalizeRequirementsData(rows) {
   }, new Map());
 
   const matchIndex = findMatchColumnIndex(headers, dataRows);
-  const requirementIndex = headerMap.get(normalizeHeaderKey('WhatScopelyIsLookingFor'));
-  const relatedExperienceIndex = headerMap.get(normalizeHeaderKey('Description or Related Experience'));
-  const companyIndex = headerMap.get(normalizeHeaderKey('Company'));
-  const expertiseIndex = headerMap.get(normalizeHeaderKey('Level of Expertise 1/5'));
-  const improvementIndex = headerMap.get(normalizeHeaderKey('Aspect To be Improved'));
-  const nextStepIndex = headerMap.get(normalizeHeaderKey('Next step to improve'));
+  const requirementIndex = getHeaderIndex(headerMap, [
+    'WhatScopelyIsLookingFor',
+    'What Scopely Is Looking For'
+  ]);
+  const relatedExperienceIndex = getHeaderIndex(headerMap, [
+    'Description or Related Experience',
+    'Description / Related Experience'
+  ]);
+  const companyIndex = getHeaderIndex(headerMap, ['Company', 'Company / Context']);
+  const expertiseIndex = getHeaderIndex(headerMap, [
+    'Level of Expertise 1/5',
+    'Level of Expertise (1/5)'
+  ]);
+  const improvementIndex = getHeaderIndex(headerMap, [
+    'Aspect To be Improved',
+    'Aspect to be Improved'
+  ]);
+  const nextStepIndex = getHeaderIndex(headerMap, ['Next step to improve', 'Next Step to Improve']);
 
   return dataRows
     .map((row) => {
@@ -553,54 +577,66 @@ function renderAutonomyChart() {
   const canvas = document.getElementById('autonomy-chart');
   if (!canvas || typeof Chart === 'undefined') return;
 
-  if (autonomyChart) {
-    autonomyChart.destroy();
+  const data = {
+    labels: PHASE_LABELS,
+    datasets: CORE_RESPONSIBILITIES.map((item) => ({
+      label: item.name,
+      data: item.levels,
+      borderColor: item.color,
+      backgroundColor: item.color,
+      tension: 0.3,
+      pointRadius: 3,
+      pointHoverRadius: 5,
+      borderWidth: 2
+    }))
+  };
+
+  if (!autonomyChart) {
+    autonomyChart = new Chart(canvas, {
+      type: 'line',
+      data,
+      options: getAutonomyChartOptions()
+    });
+    return;
   }
 
-  autonomyChart = new Chart(canvas, {
-    type: 'line',
-    data: {
-      labels: PHASE_LABELS,
-      datasets: CORE_RESPONSIBILITIES.map((item) => ({
-        label: item.name,
-        data: item.levels,
-        borderColor: item.color,
-        backgroundColor: item.color,
-        tension: 0.3,
-        pointRadius: 3,
-        pointHoverRadius: 5,
-        borderWidth: 2
-      }))
-    },
-    options: getAutonomyChartOptions()
-  });
+  autonomyChart.data = data;
+  autonomyChart.options = getAutonomyChartOptions();
+  autonomyChart.update('none');
 }
 
 function renderExpertiseChart(items) {
   const canvas = document.getElementById('expertise-chart');
   if (!canvas || typeof Chart === 'undefined') return;
 
-  if (expertiseChart) {
-    expertiseChart.destroy();
+  const data = {
+    labels: items.map((item) => wrapLabel(item.requirement)),
+    datasets: [
+      {
+        label: state.dataSource === 'live' ? 'Live CSV data' : 'Local fallback data',
+        data: items.map((item) => item.expertiseLevel || 0),
+        borderRadius: 999,
+        borderSkipped: false,
+        backgroundColor: items.map((item) =>
+          item.match ? 'rgba(122, 154, 139, 0.85)' : 'rgba(217, 119, 87, 0.85)'
+        ),
+        hoverBackgroundColor: items.map((item) => (item.match ? '#7A9A8B' : '#D97757'))
+      }
+    ]
+  };
+
+  if (!expertiseChart) {
+    expertiseChart = new Chart(canvas, {
+      type: 'bar',
+      data,
+      options: getExpertiseChartOptions(items)
+    });
+    return;
   }
 
-  expertiseChart = new Chart(canvas, {
-    type: 'bar',
-    data: {
-      labels: items.map((item) => wrapLabel(item.requirement)),
-      datasets: [
-        {
-          label: state.dataSource === 'live' ? 'Live CSV data' : 'Local fallback data',
-          data: items.map((item) => item.expertiseLevel || 0),
-          borderRadius: 999,
-          borderSkipped: false,
-          backgroundColor: items.map((item) => (item.match ? 'rgba(122, 154, 139, 0.85)' : 'rgba(217, 119, 87, 0.85)')),
-          hoverBackgroundColor: items.map((item) => (item.match ? '#7A9A8B' : '#D97757'))
-        }
-      ]
-    },
-    options: getExpertiseChartOptions(items)
-  });
+  expertiseChart.data = data;
+  expertiseChart.options = getExpertiseChartOptions(items);
+  expertiseChart.update('none');
 }
 
 function updateDataState(source, message) {
