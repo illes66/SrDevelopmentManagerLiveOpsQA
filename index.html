@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Senior Development Manager, LiveOps QA | Interview Landing</title>
+    <meta
+      name="description"
+      content="Landing presentation page for the Senior Development Manager, LiveOps QA interview process."
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              autumn: {
+                ink: '#422f2a',
+                clay: '#8f5f52',
+                rose: '#d39b8f',
+                sand: '#f2dfd3',
+                cream: '#fbf5ef',
+                sage: '#a7b69a',
+                gold: '#d8b98d'
+              }
+            },
+            boxShadow: {
+              soft: '0 24px 80px rgba(66, 47, 42, 0.12)'
+            }
+          }
+        }
+      };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+    <style>
+      :root {
+        /* Ajusta esta paleta para cambiar rápidamente el look & feel de la landing. */
+        --hero-gradient-start: #fbf5ef;
+        --hero-gradient-middle: #f2dfd3;
+        --hero-gradient-end: #efe7d4;
+        --card-border: rgba(143, 95, 82, 0.18);
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background: linear-gradient(135deg, var(--hero-gradient-start), var(--hero-gradient-middle), var(--hero-gradient-end));
+      }
+
+      .tab-panel {
+        display: none;
+      }
+
+      .tab-panel[data-active='true'] {
+        display: block;
+      }
+
+      .intro-copy,
+      .experience-card,
+      .opportunity-highlight {
+        opacity: 0;
+      }
+
+      .intro-copy.is-visible {
+        opacity: 1;
+        animation: floatUp 1.25s ease forwards;
+      }
+
+      .experience-layout {
+        min-height: 30rem;
+      }
+
+      .experience-stack {
+        transition: all 1s ease;
+      }
+
+      .experience-stack.is-pinned {
+        transform: translateX(-8%);
+      }
+
+      .experience-card {
+        transform: translateY(24px) scale(1.03);
+        transition: transform 0.9s ease, opacity 0.9s ease, font-size 0.9s ease;
+      }
+
+      .experience-card.is-visible {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+
+      .experience-stack.is-pinned .experience-card {
+        font-size: 0.95rem;
+      }
+
+      .opportunity-bullet {
+        opacity: 0;
+        transform: translateX(18px);
+      }
+
+      .opportunity-bullet.is-visible {
+        opacity: 1;
+        transform: translateX(0);
+        transition: all 0.6s ease;
+      }
+
+      .opportunity-highlight.is-visible {
+        opacity: 1;
+        transition: opacity 0.45s ease;
+      }
+
+      .phase-chip {
+        border: 1px solid var(--card-border);
+      }
+
+      @keyframes floatUp {
+        from {
+          transform: translateY(48px);
+        }
+        to {
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body class="min-h-screen text-autumn-ink">
+    <div class="mx-auto max-w-7xl px-6 py-8 lg:px-10">
+      <header class="mb-8 rounded-[2rem] border border-[var(--card-border)] bg-white/70 p-5 shadow-soft backdrop-blur">
+        <div class="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+          <div>
+            <p class="text-sm uppercase tracking-[0.35em] text-autumn-clay">Senior Development Manager, LiveOps QA</p>
+            <h1 class="mt-2 text-3xl font-semibold text-autumn-ink lg:text-4xl">Landing presentation for interview storytelling</h1>
+          </div>
+          <nav class="flex flex-wrap gap-3" aria-label="Primary">
+            <button data-tab-trigger="home" class="tab-trigger rounded-full border border-autumn-clay/20 bg-autumn-ink px-5 py-2 text-sm font-medium text-white transition hover:bg-autumn-clay">
+              Home
+            </button>
+            <button data-tab-trigger="next-steps" class="tab-trigger rounded-full border border-autumn-clay/20 bg-white px-5 py-2 text-sm font-medium text-autumn-ink transition hover:bg-autumn-sand">
+              Next Steps
+            </button>
+          </nav>
+        </div>
+      </header>
+
+      <main class="space-y-8">
+        <section id="home" class="tab-panel" data-active="true">
+          <div class="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
+            <article class="rounded-[2rem] border border-[var(--card-border)] bg-white/75 p-8 shadow-soft backdrop-blur">
+              <div class="space-y-6">
+                <div class="inline-flex rounded-full bg-autumn-sand px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-autumn-clay">
+                  Background &amp; Experience
+                </div>
+                <div class="intro-copy rounded-[1.5rem] bg-autumn-cream p-6 text-lg leading-8 text-autumn-ink" id="intro-copy"></div>
+              </div>
+            </article>
+
+            <aside class="rounded-[2rem] border border-[var(--card-border)] bg-autumn-ink p-8 text-autumn-cream shadow-soft">
+              <p class="text-sm uppercase tracking-[0.3em] text-autumn-gold">Candidate focus</p>
+              <h2 class="mt-4 text-3xl font-semibold">Scopely fit at a glance</h2>
+              <p class="mt-4 text-base leading-7 text-autumn-sand">
+                This landing connects candidate context, role expectations and a practical execution roadmap.
+              </p>
+              <div class="mt-8 grid gap-4 sm:grid-cols-3">
+                <div class="rounded-3xl bg-white/10 p-4">
+                  <p class="text-3xl font-semibold" id="summary-studios">0</p>
+                  <p class="mt-2 text-sm text-autumn-sand">Game studio snapshots</p>
+                </div>
+                <div class="rounded-3xl bg-white/10 p-4">
+                  <p class="text-3xl font-semibold" id="summary-priorities">0</p>
+                  <p class="mt-2 text-sm text-autumn-sand">Role priorities matched</p>
+                </div>
+                <div class="rounded-3xl bg-white/10 p-4">
+                  <p class="text-3xl font-semibold" id="summary-phases">0</p>
+                  <p class="mt-2 text-sm text-autumn-sand">Roadmap phases</p>
+                </div>
+              </div>
+            </aside>
+          </div>
+
+          <div class="experience-layout mt-8 grid gap-8 rounded-[2rem] border border-[var(--card-border)] bg-white/70 p-8 shadow-soft backdrop-blur lg:grid-cols-[0.95fr_1.05fr]">
+            <div>
+              <p class="text-sm uppercase tracking-[0.3em] text-autumn-clay">Studio trajectory</p>
+              <div id="experience-stack" class="experience-stack mt-6 grid gap-5"></div>
+            </div>
+            <div>
+              <p class="text-sm uppercase tracking-[0.3em] text-autumn-clay">What Scopely is looking for</p>
+              <div class="mt-6 rounded-[1.5rem] bg-autumn-cream p-6">
+                <h3 id="opportunity-title" class="opportunity-highlight text-2xl font-semibold text-autumn-ink"></h3>
+                <p id="opportunity-description" class="opportunity-highlight mt-4 text-base leading-7 text-autumn-clay"></p>
+              </div>
+              <ul id="opportunity-bullets" class="mt-6 space-y-3"></ul>
+            </div>
+          </div>
+        </section>
+
+        <section id="next-steps" class="tab-panel" data-active="false">
+          <div class="grid gap-8 xl:grid-cols-[1.1fr_0.9fr]">
+            <article class="rounded-[2rem] border border-[var(--card-border)] bg-white/75 p-8 shadow-soft backdrop-blur">
+              <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+                <div>
+                  <p class="text-sm uppercase tracking-[0.3em] text-autumn-clay">Roadmap phases</p>
+                  <h2 class="mt-2 text-3xl font-semibold text-autumn-ink">Timeline to operational impact</h2>
+                </div>
+                <div class="rounded-3xl bg-autumn-cream px-4 py-3 text-sm text-autumn-clay">
+                  Timeline generated from roadmap phase estimates.
+                </div>
+              </div>
+              <div class="mt-8 h-[24rem]">
+                <canvas id="timeline-chart" aria-label="Roadmap timeline"></canvas>
+              </div>
+            </article>
+
+            <article class="rounded-[2rem] border border-[var(--card-border)] bg-autumn-ink p-8 text-autumn-cream shadow-soft">
+              <p class="text-sm uppercase tracking-[0.3em] text-autumn-gold">Documentation</p>
+              <h2 class="mt-2 text-3xl font-semibold">Interview support pack</h2>
+              <div id="resources-list" class="mt-6 grid gap-4"></div>
+            </article>
+          </div>
+
+          <div class="mt-8 grid gap-8 xl:grid-cols-[1.15fr_0.85fr]">
+            <article class="rounded-[2rem] border border-[var(--card-border)] bg-white/75 p-8 shadow-soft backdrop-blur">
+              <div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+                <div>
+                  <p class="text-sm uppercase tracking-[0.3em] text-autumn-clay">Master performance ownership</p>
+                  <h2 class="mt-2 text-3xl font-semibold text-autumn-ink">Core responsibilities by phase and expertise target</h2>
+                </div>
+                <p class="max-w-sm text-sm leading-6 text-autumn-clay">
+                  Column H can be updated in the data object to reflect the expertise milestone expected for each phase.
+                </p>
+              </div>
+              <div id="expertise-matrix" class="mt-8 grid gap-4"></div>
+            </article>
+
+            <article class="rounded-[2rem] border border-[var(--card-border)] bg-white/75 p-8 shadow-soft backdrop-blur">
+              <p class="text-sm uppercase tracking-[0.3em] text-autumn-clay">Suggested enhancements</p>
+              <h2 class="mt-2 text-3xl font-semibold text-autumn-ink">Next improvements for the landing</h2>
+              <ul id="improvements-list" class="mt-6 space-y-4"></ul>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="./assets/app.js"></script>
+  </body>
+</html>
