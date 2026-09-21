@@ -1,362 +1,254 @@
-const landingContent = {
-  // Sustituye este contenido por datos exportados de Google Sheets cuando la URL pública esté disponible.
-  // La estructura replica los bloques solicitados para que editar copy, colores y métricas sea rápido.
-  intro:
-    'A concise walkthrough of my leadership trajectory in game production, the LiveOps QA priorities Scopely needs today, and a practical roadmap for turning those expectations into measurable studio execution.',
-  experience: [
-    {
-      studio: '2K Valencia',
-      summary:
-        'At 2K Valencia I coordinated milestone planning, stakeholder reporting and asset-delivery governance across international partners, building the operational rigor needed to align quality, schedules and publishing expectations.'
-    },
-    {
-      studio: 'Stage Clear Studios',
-      summary:
-        'At Stage Clear Studios I moved from hands-on technical problem solving into delivery support, collaborating across design, code and publishing needs while learning how disciplined production systems protect team focus and release confidence.'
-    },
-    {
-      studio: 'Cross-functional content & operations background',
-      summary:
-        'Earlier leadership work in content, communications and live execution strengthened the core skills that matter in LiveOps QA leadership: clear communication, prioritization under pressure, process design and consistent follow-through with diverse stakeholders.'
-    }
-  ],
-  scopelyNeeds: [
-    {
-      title: 'Scale LiveOps QA operations with clear ownership',
-      description:
-        'Translate goals into rituals, dashboards and decision rights so each release train has a visible owner, a measurable risk picture and reliable escalation paths.'
-    },
-    {
-      title: 'Connect product, QA and stakeholders around release health',
-      description:
-        'Create a communication layer that keeps feature teams, leadership and partners aligned on readiness, blockers, mitigations and player impact before issues become surprises.'
-    },
-    {
-      title: 'Build sustainable quality processes for fast-moving teams',
-      description:
-        'Standardize workflows for triage, regression, coverage and post-release follow-up so the organization can move quickly without trading away predictability.'
-    },
-    {
-      title: 'Develop talent, accountability and continuous improvement',
-      description:
-        'Coach managers and ICs through expectations, feedback loops and success metrics that improve both execution quality and long-term team resilience.'
-    },
-    {
-      title: 'Use data to prioritize what matters most to players',
-      description:
-        'Anchor planning in live quality signals, release risk and recurring defects so operational attention stays focused on the issues that most affect player trust.'
-    }
-  ],
-  roadmap: {
-    phases: [
-      { phase: 'Phase 1 · Discover', weeks: 3, focus: 'People, releases, KPIs and risks' },
-      { phase: 'Phase 2 · Stabilize', weeks: 4, focus: 'Rituals, triage and reporting' },
-      { phase: 'Phase 3 · Scale', weeks: 5, focus: 'Coverage, staffing and governance' },
-      { phase: 'Phase 4 · Optimize', weeks: 4, focus: 'Automation, coaching and insights' }
-    ],
-    responsibilities: [
-      {
-        title: 'Release quality governance',
-        roadmapTask: 'Establish a release-readiness review with shared scorecards.',
-        expertiseTarget: 'Operating independently by Phase 2',
-        phases: ['Phase 1 · Discover', 'Phase 2 · Stabilize']
-      },
-      {
-        title: 'Live issue triage and escalation',
-        roadmapTask: 'Create severity rules, ownership routes and escalation SLAs.',
-        expertiseTarget: 'Trusted escalation lead by Phase 2',
-        phases: ['Phase 1 · Discover', 'Phase 2 · Stabilize', 'Phase 3 · Scale']
-      },
-      {
-        title: 'Cross-functional stakeholder reporting',
-        roadmapTask: 'Launch a weekly quality narrative with risks, trends and actions.',
-        expertiseTarget: 'Executive-ready communication by Phase 3',
-        phases: ['Phase 2 · Stabilize', 'Phase 3 · Scale']
-      },
-      {
-        title: 'Team health and manager enablement',
-        roadmapTask: 'Define expectations, coaching cadences and growth checkpoints.',
-        expertiseTarget: 'Coaching system embedded by Phase 4',
-        phases: ['Phase 3 · Scale', 'Phase 4 · Optimize']
-      },
-      {
-        title: 'Process improvement and data loops',
-        roadmapTask: 'Prioritize recurring quality gaps and convert them into experiments.',
-        expertiseTarget: 'Continuous improvement cadence by Phase 4',
-        phases: ['Phase 2 · Stabilize', 'Phase 3 · Scale', 'Phase 4 · Optimize']
-      }
-    ]
+const REQUIREMENTS_MAP = [
+  {
+    title: 'Production & Operations Acumen (5/5)',
+    detail: 'Experiencia en pipelines CI/CD, build distribution y certificación de más de 50 juegos.'
   },
-  resources: [
-    {
-      label: 'Role brief',
-      value: 'Senior Development Manager, LiveOps QA description',
-      href: '#',
-      status: 'Add the public job-description URL here when available.'
-    },
-    {
-      label: 'CV',
-      value: 'Candidate CV / résumé',
-      href: '#',
-      status: 'Replace with the final CV link or downloadable PDF.'
-    },
-    {
-      label: 'Portfolio GitHub Page',
-      value: 'Raquel SI Senior Producer portfolio',
-      href: 'https://illes66.github.io/RaquelSISeniorProducer/',
-      status: 'Active external portfolio reference.'
-    },
-    {
-      label: 'Google Sheet source',
-      value: 'Sr. Development Manager, LiveOps QA at Scopely',
-      href: '#',
-      status: 'Connect the public Sheet URL or a JSON/CSV export.'
-    }
-  ],
-  improvements: [
-    'Connect the landing to a published Google Sheet export so role priorities and roadmap phases update automatically.',
-    'Add micro-interactions tied to scroll position so each studio story and Scopely requirement reveals at interview pace.',
-    'Embed downloadable CV and a printable one-page interview brief for recruiters and hiring managers.',
-    'Introduce KPI callouts sourced from real portfolio outcomes to strengthen credibility with quantified evidence.',
-    'Add bilingual copy toggles (ES / EN) to support both local and international interview loops.'
-  ]
-};
+  {
+    title: 'Master Communicator (5/5)',
+    detail: 'Comunicación directa con stakeholders de 1st y 3rd parties (Sony, MS, Nintendo) y equipos directivos.'
+  },
+  {
+    title: 'Influence Without Authority (4/5)',
+    detail:
+      'Gestión transversal de equipos en matriz sin autoridad jerárquica directa mediante empatía técnica y datos.'
+  },
+  {
+    title: 'Vendor & Partner Management (4/5)',
+    detail: 'Control de SLAs, benchmarking y coordinación de QA externo.'
+  },
+  {
+    title: 'LiveOps Backends & Remote Config (2/5 — Ramp Up)',
+    detail: 'Actualización proactiva en arquitecturas de Playgami, Firebase y entornos Unity LiveOps.'
+  }
+];
 
-const tabTriggers = document.querySelectorAll('[data-tab-trigger]');
-const tabPanels = document.querySelectorAll('.tab-panel');
-const introCopy = document.getElementById('intro-copy');
-const experienceStack = document.getElementById('experience-stack');
-const opportunityTitle = document.getElementById('opportunity-title');
-const opportunityDescription = document.getElementById('opportunity-description');
-const opportunityBullets = document.getElementById('opportunity-bullets');
-const resourcesList = document.getElementById('resources-list');
-const improvementsList = document.getElementById('improvements-list');
-const expertiseMatrix = document.getElementById('expertise-matrix');
+const TIMELINE_PHASES = [
+  {
+    title: 'Fase 0 (Semanas 1–2 | Oct 2026)',
+    detail: 'Onboarding, 1-on-1s clave con Marion y Leads, inmersión en la cultura y herramientas de Scopely.'
+  },
+  {
+    title: 'Fase 01 (Semanas 3–4 | Nov 2026)',
+    detail: 'Ramp-up técnico en Playgami, Flam3D, revisión de calendarios de LiveOps y arquitectura de datos.'
+  },
+  {
+    title: 'Fase 02 (Meses 2–3 | Nov–Dic 2026)',
+    detail:
+      'Autonomía operativa inicial, toma de propiedad en sign-offs de QA de LiveOps y evaluación de SLAs de vendors.'
+  },
+  {
+    title: 'Fase 03 (Meses 3–6 | Ene–Mar 2027)',
+    detail:
+      'Optimización de workflows, integración de herramientas de IA/automatización de scripts y eliminación de bottlenecks.'
+  },
+  {
+    title: 'Fase 04 (Meses 6–12 | Mar–Sep 2027)',
+    detail:
+      'Impacto estratégico global, escalabilidad del Quality OS y alineación continua con Executive Producers.'
+  }
+];
 
-let activeNeedIndex = 0;
-let needsLoopStarted = false;
-let timelineChart;
+// Editable: 8 Core Responsibilities plausibles para el rol.
+const CORE_RESPONSIBILITIES = [
+  { name: 'LiveOps QA Sign-off Governance', levels: [0, 1, 2, 3, 3], color: '#2B4C6F' },
+  { name: 'Playgami Toolchain Integration', levels: [0, 1, 2, 2, 3], color: '#D97757' },
+  { name: 'Vendor SLA & KPI Management', levels: [1, 1, 2, 2, 3], color: '#7A9A8B' },
+  { name: 'Cross-Discipline Release Communication', levels: [1, 2, 2, 3, 3], color: '#4C6F94' },
+  { name: 'Escaped Defect Prevention Strategy', levels: [0, 1, 2, 2, 3], color: '#B5654D' },
+  { name: 'Live Data Risk Monitoring', levels: [0, 1, 1, 2, 3], color: '#5E7F70' },
+  { name: 'Automation & Scripted QA Workflows', levels: [0, 0, 1, 2, 3], color: '#7B91AB' },
+  { name: 'Executive Reporting & Roadmap Alignment', levels: [1, 1, 2, 3, 3], color: '#C67C64' }
+];
 
-function renderSummary() {
-  document.getElementById('summary-studios').textContent = landingContent.experience.length;
-  document.getElementById('summary-priorities').textContent = landingContent.scopelyNeeds.length;
-  document.getElementById('summary-phases').textContent = landingContent.roadmap.phases.length;
-}
+const PHASE_LABELS = ['Fase 0', 'Fase 01', 'Fase 02', 'Fase 03', 'Fase 04'];
 
-function renderIntro() {
-  introCopy.textContent = landingContent.intro;
-  requestAnimationFrame(() => introCopy.classList.add('is-visible'));
-}
+const tabTriggers = Array.from(document.querySelectorAll('[data-tab-trigger]'));
+const tabPanels = Array.from(document.querySelectorAll('.tab-panel'));
+const requirementsAccordion = document.getElementById('requirements-accordion');
+const timelineAccordion = document.getElementById('timeline-accordion');
 
-function renderExperience() {
-  const cards = landingContent.experience
+let autonomyChart;
+
+function renderAccordion(container, items) {
+  container.innerHTML = items
     .map(
-      (item) => `
-        <article class="experience-card rounded-[1.5rem] border border-autumn-clay/10 bg-autumn-cream p-5 shadow-sm">
-          <p class="text-xs font-semibold uppercase tracking-[0.3em] text-autumn-clay">${item.studio}</p>
-          <p class="mt-3 text-lg leading-7 text-autumn-ink">${item.summary}</p>
-        </article>
-      `
-    )
-    .join('');
-
-  experienceStack.innerHTML = cards;
-  const experienceCards = Array.from(experienceStack.querySelectorAll('.experience-card'));
-
-  experienceCards.forEach((card, index) => {
-    setTimeout(() => card.classList.add('is-visible'), 400 + index * 350);
-  });
-
-  setTimeout(() => {
-    experienceStack.classList.add('is-pinned');
-    startNeedsLoop();
-  }, 2000);
-}
-
-function renderResources() {
-  resourcesList.innerHTML = landingContent.resources
-    .map(
-      (resource) => `
-        <a
-          class="rounded-[1.5rem] border border-white/10 bg-white/10 p-5 transition hover:bg-white/15"
-          href="${resource.href}"
-          ${resource.href === '#' ? 'aria-disabled="true"' : 'target="_blank" rel="noreferrer"'}
-        >
-          <p class="text-xs uppercase tracking-[0.3em] text-autumn-gold">${resource.label}</p>
-          <p class="mt-2 text-lg font-semibold text-white">${resource.value}</p>
-          <p class="mt-2 text-sm leading-6 text-autumn-sand">${resource.status}</p>
-        </a>
-      `
+      (item, index) => `
+      <details class="rounded-xl border border-brand-primary/15 bg-brand-bg p-4" ${index === 0 ? 'open' : ''}>
+        <summary class="focusable cursor-pointer list-none text-sm font-semibold text-brand-primary">
+          <span class="inline-flex items-center gap-2">
+            <i data-lucide="chevron-right" class="h-4 w-4 text-brand-secondary"></i>
+            ${item.title}
+          </span>
+        </summary>
+        <p class="mt-3 text-sm leading-6 text-brand-text">${item.detail}</p>
+      </details>
+    `
     )
     .join('');
 }
 
-function renderImprovements() {
-  improvementsList.innerHTML = landingContent.improvements
-    .map(
-      (item) => `
-        <li class="rounded-[1.5rem] border border-autumn-clay/10 bg-autumn-cream p-5 text-base leading-7 text-autumn-ink">
-          ${item}
-        </li>
-      `
-    )
-    .join('');
-}
-
-function renderExpertiseMatrix() {
-  const phaseLabels = landingContent.roadmap.phases.map((phase) => phase.phase);
-
-  expertiseMatrix.innerHTML = landingContent.roadmap.responsibilities
-    .map((item) => {
-      const chips = phaseLabels
-        .map((phase) => {
-          const isActive = item.phases.includes(phase);
-          return `
-            <span class="phase-chip rounded-full px-3 py-2 text-xs font-medium ${
-              isActive ? 'bg-autumn-ink text-white' : 'bg-white text-autumn-clay'
-            }">
-              ${phase}
-            </span>
-          `;
-        })
-        .join('');
-
-      return `
-        <article class="rounded-[1.5rem] border border-autumn-clay/10 bg-white p-5">
-          <div class="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
-            <div class="max-w-2xl">
-              <p class="text-xs font-semibold uppercase tracking-[0.3em] text-autumn-clay">Core responsibility</p>
-              <h3 class="mt-2 text-xl font-semibold text-autumn-ink">${item.title}</h3>
-              <p class="mt-3 text-sm leading-6 text-autumn-clay"><span class="font-semibold text-autumn-ink">Related roadmap task:</span> ${item.roadmapTask}</p>
-            </div>
-            <div class="rounded-3xl bg-autumn-sand px-4 py-3 text-sm font-medium text-autumn-ink">
-              ${item.expertiseTarget}
-            </div>
-          </div>
-          <div class="mt-5 flex flex-wrap gap-2">${chips}</div>
-        </article>
-      `;
-    })
-    .join('');
-}
-
-function startNeedsLoop() {
-  if (needsLoopStarted) return;
-  needsLoopStarted = true;
-
-  const showNeed = () => {
-    const need = landingContent.scopelyNeeds[activeNeedIndex];
-    opportunityTitle.classList.remove('is-visible');
-    opportunityDescription.classList.remove('is-visible');
-
-    setTimeout(() => {
-      opportunityTitle.textContent = need.title;
-      opportunityDescription.textContent = need.description;
-      opportunityTitle.classList.add('is-visible');
-      opportunityDescription.classList.add('is-visible');
-
-      const bullet = document.createElement('li');
-      bullet.className = 'opportunity-bullet rounded-full border border-autumn-clay/10 bg-white px-4 py-3 text-sm font-medium text-autumn-ink';
-      bullet.textContent = need.title;
-      opportunityBullets.appendChild(bullet);
-      requestAnimationFrame(() => bullet.classList.add('is-visible'));
-
-      activeNeedIndex = (activeNeedIndex + 1) % landingContent.scopelyNeeds.length;
-      if (activeNeedIndex !== 0) {
-        setTimeout(showNeed, 2600);
-      }
-    }, 200);
-  };
-
-  showNeed();
-}
-
-function renderTimelineChart() {
-  const ctx = document.getElementById('timeline-chart');
-
-  timelineChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: landingContent.roadmap.phases.map((item) => item.phase),
-      datasets: [
-        {
-          label: 'Weeks',
-          data: landingContent.roadmap.phases.map((item) => item.weeks),
-          backgroundColor: ['#8f5f52', '#d39b8f', '#a7b69a', '#d8b98d'],
-          borderRadius: 999,
-          borderSkipped: false
+function getChartOptions() {
+  return {
+    responsive: true,
+    maintainAspectRatio: false,
+    interaction: {
+      mode: 'nearest',
+      intersect: false
+    },
+    plugins: {
+      legend: {
+        display: true,
+        position: 'bottom',
+        labels: {
+          usePointStyle: true,
+          boxWidth: 8,
+          color: '#2D3748'
         }
-      ]
-    },
-    options: {
-      maintainAspectRatio: false,
-      indexAxis: 'y',
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          callbacks: {
-            label(context) {
-              const focus = landingContent.roadmap.phases[context.dataIndex].focus;
-              return `${context.raw} weeks · ${focus}`;
-            }
+      },
+      tooltip: {
+        callbacks: {
+          label(context) {
+            return `${context.dataset.label}: Level ${context.parsed.y}`;
           }
         }
+      }
+    },
+    scales: {
+      x: {
+        grid: { color: 'rgba(43, 76, 111, 0.08)' },
+        ticks: { color: '#2D3748' }
       },
-      scales: {
-        x: {
-          grid: { color: 'rgba(143, 95, 82, 0.12)' },
-          ticks: { color: '#6b4b42' }
+      y: {
+        min: 0,
+        max: 3,
+        ticks: {
+          stepSize: 1,
+          color: '#2D3748',
+          callback(value) {
+            return `Level ${value}`;
+          }
         },
-        y: {
-          grid: { display: false },
-          ticks: { color: '#422f2a', font: { size: 12, weight: '600' } }
-        }
+        grid: { color: 'rgba(43, 76, 111, 0.08)' }
       }
     }
+  };
+}
+
+function renderAutonomyChart() {
+  const canvas = document.getElementById('autonomy-chart');
+  if (!canvas || typeof Chart === 'undefined') return;
+
+  if (autonomyChart) {
+    autonomyChart.destroy();
+  }
+
+  autonomyChart = new Chart(canvas, {
+    type: 'line',
+    data: {
+      labels: PHASE_LABELS,
+      datasets: CORE_RESPONSIBILITIES.map((item) => ({
+        label: item.name,
+        data: item.levels,
+        borderColor: item.color,
+        backgroundColor: item.color,
+        tension: 0.3,
+        pointRadius: 3,
+        pointHoverRadius: 5,
+        borderWidth: 2
+      }))
+    },
+    options: getChartOptions()
   });
 }
 
-function ensureTimelineChart() {
-  if (!timelineChart) {
-    renderTimelineChart();
-    return;
-  }
-
-  setTimeout(() => timelineChart.resize(), 50);
+function styleTab(trigger, active) {
+  trigger.setAttribute('aria-selected', String(active));
+  trigger.tabIndex = active ? 0 : -1;
+  trigger.classList.toggle('bg-brand-primary', active);
+  trigger.classList.toggle('text-white', active);
+  trigger.classList.toggle('bg-white', !active);
+  trigger.classList.toggle('text-brand-primary', !active);
 }
 
 function activateTab(tabId) {
   tabPanels.forEach((panel) => {
-    panel.dataset.active = String(panel.id === tabId);
+    panel.dataset.active = String(panel.id === `panel-${tabId}`);
   });
 
   tabTriggers.forEach((trigger) => {
-    const isActive = trigger.dataset.tabTrigger === tabId;
-    trigger.classList.toggle('bg-autumn-ink', isActive);
-    trigger.classList.toggle('text-white', isActive);
-    trigger.classList.toggle('bg-white', !isActive);
-    trigger.classList.toggle('text-autumn-ink', !isActive);
+    const active = trigger.dataset.tabTrigger === tabId;
+    styleTab(trigger, active);
   });
 
   if (tabId === 'next-steps') {
-    ensureTimelineChart();
+    requestAnimationFrame(() => {
+      renderAutonomyChart();
+      setTimeout(() => autonomyChart && autonomyChart.resize(), 60);
+    });
   }
 }
 
-function registerTabs() {
+function registerTabEvents() {
   tabTriggers.forEach((trigger) => {
     trigger.addEventListener('click', () => activateTab(trigger.dataset.tabTrigger));
   });
+
+  document.getElementById('main-tablist')?.addEventListener('keydown', (event) => {
+    const current = document.activeElement;
+    if (!current?.matches('[data-tab-trigger]')) return;
+
+    const index = tabTriggers.indexOf(current);
+    if (index === -1) return;
+
+    let targetIndex = index;
+    if (event.key === 'ArrowRight') targetIndex = (index + 1) % tabTriggers.length;
+    if (event.key === 'ArrowLeft') targetIndex = (index - 1 + tabTriggers.length) % tabTriggers.length;
+    if (event.key === 'Home') targetIndex = 0;
+    if (event.key === 'End') targetIndex = tabTriggers.length - 1;
+
+    if (targetIndex !== index) {
+      event.preventDefault();
+      tabTriggers[targetIndex].focus();
+      activateTab(tabTriggers[targetIndex].dataset.tabTrigger);
+    }
+  });
+}
+
+function registerPlaceholderLinks() {
+  document.querySelectorAll('[data-placeholder-link="true"]').forEach((link) => {
+    link.addEventListener('click', (event) => {
+      event.preventDefault();
+    });
+  });
+}
+
+function initFadeIn() {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.2 }
+  );
+
+  document.querySelectorAll('.fade-in').forEach((item) => observer.observe(item));
 }
 
 function init() {
-  renderSummary();
-  renderIntro();
-  renderExperience();
-  renderResources();
-  renderImprovements();
-  renderExpertiseMatrix();
-  registerTabs();
+  renderAccordion(requirementsAccordion, REQUIREMENTS_MAP);
+  renderAccordion(timelineAccordion, TIMELINE_PHASES);
+  registerTabEvents();
+  registerPlaceholderLinks();
+  initFadeIn();
+  activateTab('home');
+
+  if (window.lucide?.createIcons) {
+    window.lucide.createIcons();
+  }
 }
 
-init();
+window.addEventListener('DOMContentLoaded', init);
