@@ -1,9 +1,10 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
+const path = require('node:path');
 const vm = require('node:vm');
 
-const APP_PATH = '/home/runner/work/SrDevelopmentManagerLiveOpsQA/SrDevelopmentManagerLiveOpsQA/assets/app.js';
+const APP_PATH = path.resolve(__dirname, '..', 'assets', 'app.js');
 
 function createElementStub() {
   return {

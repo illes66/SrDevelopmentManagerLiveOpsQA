@@ -691,7 +691,7 @@ async function loadRequirementsData() {
   updateDataState('loading', 'Loading live CSV data from Google Sheets…');
 
   try {
-    const response = await fetch(GOOGLE_SHEET_CSV_URL, { method: 'GET', mode: 'cors' });
+    const response = await fetch(GOOGLE_SHEET_CSV_URL);
     if (!response.ok) {
       throw new Error(`Request failed with status ${response.status}`);
     }
