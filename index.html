@@ -3,50 +3,56 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Senior Development Manager, LiveOps QA | Interview Landing</title>
+    <title>Raquel S. I. | Sr. Development Manager, LiveOps QA candidate</title>
     <meta
       name="description"
-      content="Landing presentation page for the Senior Development Manager, LiveOps QA interview process."
+      content="Presentación interactiva para entrevista de Senior Development Manager, LiveOps QA en Scopely."
     />
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
         theme: {
           extend: {
             colors: {
-              autumn: {
-                ink: '#422f2a',
-                clay: '#8f5f52',
-                rose: '#d39b8f',
-                sand: '#f2dfd3',
-                cream: '#fbf5ef',
-                sage: '#a7b69a',
-                gold: '#d8b98d'
+              brand: {
+                bg: '#FDFBF7',
+                primary: '#2B4C6F',
+                secondary: '#D97757',
+                accent: '#7A9A8B',
+                text: '#2D3748'
               }
             },
             boxShadow: {
-              soft: '0 24px 80px rgba(66, 47, 42, 0.12)'
+              card: '0 10px 28px rgba(43, 76, 111, 0.10)'
             }
           }
         }
       };
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.468.0/dist/umd/lucide.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+
     <style>
       :root {
-        /* Ajusta esta paleta para cambiar rápidamente el look & feel de la landing. */
-        --hero-gradient-start: #fbf5ef;
-        --hero-gradient-middle: #f2dfd3;
-        --hero-gradient-end: #efe7d4;
-        --card-border: rgba(143, 95, 82, 0.18);
-      }
+        /*
+          PALETA PASTEL EDITABLE:
+          Cambia estos tokens para ajustar rápidamente tonos sin tocar el layout.
+        */
+        --bg-main: #fdfbf7;
+        --primary-muted-blue: #2b4c6f;
+        --secondary-terracotta: #d97757;
+        --accent-sage: #7a9a8b;
+        --text-main: #2d3748;
 
-      html {
-        scroll-behavior: smooth;
+        --card-bg: #ffffff;
+        --card-border: rgba(43, 76, 111, 0.12);
+        --focus-ring: rgba(217, 119, 87, 0.45);
       }
 
       body {
-        background: linear-gradient(135deg, var(--hero-gradient-start), var(--hero-gradient-middle), var(--hero-gradient-end));
+        background: var(--bg-main);
+        color: var(--text-main);
       }
 
       .tab-panel {
@@ -57,187 +63,206 @@
         display: block;
       }
 
-      .intro-copy,
-      .experience-card,
-      .opportunity-highlight {
+      .fade-in {
         opacity: 0;
+        transform: translateY(8px);
+        transition: opacity 0.32s ease, transform 0.32s ease;
       }
 
-      .intro-copy.is-visible {
+      .fade-in.is-visible {
         opacity: 1;
-        animation: floatUp 1.25s ease forwards;
+        transform: translateY(0);
       }
 
-      .experience-layout {
-        min-height: 30rem;
-      }
-
-      .experience-stack {
-        transition: all 1s ease;
-      }
-
-      .experience-stack.is-pinned {
-        transform: translateX(-8%);
-      }
-
-      .experience-card {
-        transform: translateY(24px) scale(1.03);
-        transition: transform 0.9s ease, opacity 0.9s ease, font-size 0.9s ease;
-      }
-
-      .experience-card.is-visible {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-
-      .experience-stack.is-pinned .experience-card {
-        font-size: 0.95rem;
-      }
-
-      .opportunity-bullet {
-        opacity: 0;
-        transform: translateX(18px);
-      }
-
-      .opportunity-bullet.is-visible {
-        opacity: 1;
-        transform: translateX(0);
-        transition: all 0.6s ease;
-      }
-
-      .opportunity-highlight.is-visible {
-        opacity: 1;
-        transition: opacity 0.45s ease;
-      }
-
-      .phase-chip {
-        border: 1px solid var(--card-border);
-      }
-
-      @keyframes floatUp {
-        from {
-          transform: translateY(48px);
-        }
-        to {
-          transform: translateY(0);
-        }
+      .focusable:focus-visible {
+        outline: 3px solid var(--focus-ring);
+        outline-offset: 2px;
       }
     </style>
   </head>
-  <body class="min-h-screen text-autumn-ink">
-    <div class="mx-auto max-w-7xl px-6 py-8 lg:px-10">
-      <header class="mb-8 rounded-[2rem] border border-[var(--card-border)] bg-white/70 p-5 shadow-soft backdrop-blur">
+  <body class="min-h-screen antialiased">
+    <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+      <header class="rounded-3xl border border-[var(--card-border)] bg-white p-5 shadow-card sm:p-6">
         <div class="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
-          <div>
-            <p class="text-sm uppercase tracking-[0.35em] text-autumn-clay">Senior Development Manager, LiveOps QA</p>
-            <h1 class="mt-2 text-3xl font-semibold text-autumn-ink lg:text-4xl">Landing presentation for interview storytelling</h1>
-          </div>
-          <nav class="flex flex-wrap gap-3" aria-label="Primary">
-            <button data-tab-trigger="home" class="tab-trigger rounded-full border border-autumn-clay/20 bg-autumn-ink px-5 py-2 text-sm font-medium text-white transition hover:bg-autumn-clay">
-              Home
-            </button>
-            <button data-tab-trigger="next-steps" class="tab-trigger rounded-full border border-autumn-clay/20 bg-white px-5 py-2 text-sm font-medium text-autumn-ink transition hover:bg-autumn-sand">
-              Next Steps
-            </button>
+          <h1 class="text-xl font-semibold leading-tight text-brand-primary sm:text-2xl">
+            Raquel S. I. | Sr. Development Manager, LiveOps QA candidate
+          </h1>
+
+          <nav aria-label="Recursos externos" class="w-full lg:w-auto">
+            <ul class="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:justify-end">
+              <li>
+                <a
+                  href="#"
+                  data-placeholder-link="true"
+                  class="focusable inline-flex w-full items-center justify-center gap-2 rounded-full border border-brand-primary/20 bg-white px-3 py-2 text-sm font-medium text-brand-primary transition hover:bg-brand-primary hover:text-white"
+                >
+                  <i data-lucide="file-text" class="h-4 w-4"></i>
+                  Mi CV
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://illes66.github.io/RaquelSISeniorProducer/"
+                  target="_blank"
+                  rel="noreferrer"
+                  class="focusable inline-flex w-full items-center justify-center gap-2 rounded-full border border-brand-primary/20 bg-white px-3 py-2 text-sm font-medium text-brand-primary transition hover:bg-brand-primary hover:text-white"
+                >
+                  <i data-lucide="briefcase" class="h-4 w-4"></i>
+                  Portfolio GitHub
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  data-placeholder-link="true"
+                  class="focusable inline-flex w-full items-center justify-center gap-2 rounded-full border border-brand-primary/20 bg-white px-3 py-2 text-sm font-medium text-brand-primary transition hover:bg-brand-primary hover:text-white"
+                >
+                  <i data-lucide="sheet" class="h-4 w-4"></i>
+                  Google Sheet Data
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  data-placeholder-link="true"
+                  class="focusable inline-flex w-full items-center justify-center gap-2 rounded-full border border-brand-primary/20 bg-white px-3 py-2 text-sm font-medium text-brand-primary transition hover:bg-brand-primary hover:text-white"
+                >
+                  <i data-lucide="clipboard-list" class="h-4 w-4"></i>
+                  Scopely Job Spec
+                </a>
+              </li>
+            </ul>
           </nav>
         </div>
       </header>
 
-      <main class="space-y-8">
-        <section id="home" class="tab-panel" data-active="true">
-          <div class="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
-            <article class="rounded-[2rem] border border-[var(--card-border)] bg-white/75 p-8 shadow-soft backdrop-blur">
-              <div class="space-y-6">
-                <div class="inline-flex rounded-full bg-autumn-sand px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-autumn-clay">
-                  Background &amp; Experience
-                </div>
-                <div class="intro-copy rounded-[1.5rem] bg-autumn-cream p-6 text-lg leading-8 text-autumn-ink" id="intro-copy"></div>
-              </div>
-            </article>
-
-            <aside class="rounded-[2rem] border border-[var(--card-border)] bg-autumn-ink p-8 text-autumn-cream shadow-soft">
-              <p class="text-sm uppercase tracking-[0.3em] text-autumn-gold">Candidate focus</p>
-              <h2 class="mt-4 text-3xl font-semibold">Scopely fit at a glance</h2>
-              <p class="mt-4 text-base leading-7 text-autumn-sand">
-                This landing connects candidate context, role expectations and a practical execution roadmap.
-              </p>
-              <div class="mt-8 grid gap-4 sm:grid-cols-3">
-                <div class="rounded-3xl bg-white/10 p-4">
-                  <p class="text-3xl font-semibold" id="summary-studios">0</p>
-                  <p class="mt-2 text-sm text-autumn-sand">Game studio snapshots</p>
-                </div>
-                <div class="rounded-3xl bg-white/10 p-4">
-                  <p class="text-3xl font-semibold" id="summary-priorities">0</p>
-                  <p class="mt-2 text-sm text-autumn-sand">Role priorities matched</p>
-                </div>
-                <div class="rounded-3xl bg-white/10 p-4">
-                  <p class="text-3xl font-semibold" id="summary-phases">0</p>
-                  <p class="mt-2 text-sm text-autumn-sand">Roadmap phases</p>
-                </div>
-              </div>
-            </aside>
-          </div>
-
-          <div class="experience-layout mt-8 grid gap-8 rounded-[2rem] border border-[var(--card-border)] bg-white/70 p-8 shadow-soft backdrop-blur lg:grid-cols-[0.95fr_1.05fr]">
-            <div>
-              <p class="text-sm uppercase tracking-[0.3em] text-autumn-clay">Studio trajectory</p>
-              <div id="experience-stack" class="experience-stack mt-6 grid gap-5"></div>
-            </div>
-            <div>
-              <p class="text-sm uppercase tracking-[0.3em] text-autumn-clay">What Scopely is looking for</p>
-              <div class="mt-6 rounded-[1.5rem] bg-autumn-cream p-6">
-                <h3 id="opportunity-title" class="opportunity-highlight text-2xl font-semibold text-autumn-ink"></h3>
-                <p id="opportunity-description" class="opportunity-highlight mt-4 text-base leading-7 text-autumn-clay"></p>
-              </div>
-              <ul id="opportunity-bullets" class="mt-6 space-y-3"></ul>
-            </div>
+      <main class="mt-6 space-y-6">
+        <section class="rounded-3xl border border-[var(--card-border)] bg-white p-4 shadow-card sm:p-5">
+          <div
+            role="tablist"
+            aria-label="Navegación principal"
+            class="grid gap-2 sm:grid-cols-2"
+            id="main-tablist"
+          >
+            <button
+              id="tab-home"
+              role="tab"
+              aria-selected="true"
+              aria-controls="panel-home"
+              tabindex="0"
+              data-tab-trigger="home"
+              class="focusable rounded-xl border border-brand-primary/25 bg-brand-primary px-4 py-3 text-left text-sm font-semibold text-white transition hover:bg-brand-primary/90"
+            >
+              Home — Background &amp; Fit
+            </button>
+            <button
+              id="tab-next-steps"
+              role="tab"
+              aria-selected="false"
+              aria-controls="panel-next-steps"
+              tabindex="-1"
+              data-tab-trigger="next-steps"
+              class="focusable rounded-xl border border-brand-primary/25 bg-white px-4 py-3 text-left text-sm font-semibold text-brand-primary transition hover:bg-brand-primary/10"
+            >
+              Next Steps — Roadmap &amp; Autonomy
+            </button>
           </div>
         </section>
 
-        <section id="next-steps" class="tab-panel" data-active="false">
-          <div class="grid gap-8 xl:grid-cols-[1.1fr_0.9fr]">
-            <article class="rounded-[2rem] border border-[var(--card-border)] bg-white/75 p-8 shadow-soft backdrop-blur">
-              <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-                <div>
-                  <p class="text-sm uppercase tracking-[0.3em] text-autumn-clay">Roadmap phases</p>
-                  <h2 class="mt-2 text-3xl font-semibold text-autumn-ink">Timeline to operational impact</h2>
-                </div>
-                <div class="rounded-3xl bg-autumn-cream px-4 py-3 text-sm text-autumn-clay">
-                  Timeline generated from roadmap phase estimates.
-                </div>
-              </div>
-              <div class="mt-8 h-[24rem]">
-                <canvas id="timeline-chart" aria-label="Roadmap timeline"></canvas>
-              </div>
+        <section
+          id="panel-home"
+          role="tabpanel"
+          aria-labelledby="tab-home"
+          class="tab-panel"
+          data-active="true"
+        >
+          <div class="grid gap-6 xl:grid-cols-[1.05fr_0.95fr]">
+            <article class="fade-in rounded-3xl border border-[var(--card-border)] bg-white p-6 shadow-card">
+              <p class="text-xs font-semibold uppercase tracking-[0.2em] text-brand-secondary">Executive profile</p>
+              <p class="mt-4 text-base leading-7 text-brand-text sm:text-lg" id="hero-text">
+                Senior Game Producer &amp; Development Manager con más de 9 años de experiencia liderando equipos multidisciplinares de hasta 35+ integrantes en títulos AAA, AA y Mobile/Console porting. Con una sólida base técnica inicial en programación C# y Unity, actúo como un puente sin fricción entre ingeniería, diseño creativo y dirección ejecutiva. Especializada en la construcción de sistemas de calidad (Quality OS), optimización de pipelines de entrega y gestión estratégica de proveedores externos.
+              </p>
             </article>
 
-            <article class="rounded-[2rem] border border-[var(--card-border)] bg-autumn-ink p-8 text-autumn-cream shadow-soft">
-              <p class="text-sm uppercase tracking-[0.3em] text-autumn-gold">Documentation</p>
-              <h2 class="mt-2 text-3xl font-semibold">Interview support pack</h2>
-              <div id="resources-list" class="mt-6 grid gap-4"></div>
+            <article class="fade-in rounded-3xl border border-[var(--card-border)] bg-white p-6 shadow-card">
+              <p class="text-xs font-semibold uppercase tracking-[0.2em] text-brand-secondary">Scopely requirements vs. my experience</p>
+              <div class="mt-4 space-y-3" id="requirements-accordion"></div>
             </article>
           </div>
 
-          <div class="mt-8 grid gap-8 xl:grid-cols-[1.15fr_0.85fr]">
-            <article class="rounded-[2rem] border border-[var(--card-border)] bg-white/75 p-8 shadow-soft backdrop-blur">
+          <section class="mt-6">
+            <h2 class="text-xl font-semibold text-brand-primary">Experiencia destacada</h2>
+            <div class="mt-4 grid gap-4 lg:grid-cols-3">
+              <article class="fade-in rounded-2xl border border-[var(--card-border)] bg-white p-5 shadow-sm">
+                <h3 class="text-base font-semibold text-brand-primary">2K Valencia (AAA &amp; Central Support)</h3>
+                <p class="mt-3 text-sm leading-6 text-brand-text">
+                  Alineación estratégica entre equipos de desarrollo, Central Tech y QA externo para títulos AAA (incluyendo Project Ethos con 31st Union). Diseño e implementación de dashboards automatizados en Jira/Excel para previsión de capacidad, métricas de riesgo y resolución anticipada de bottlenecks.
+                </p>
+              </article>
+              <article class="fade-in rounded-2xl border border-[var(--card-border)] bg-white p-5 shadow-sm">
+                <h3 class="text-base font-semibold text-brand-primary">Astragon Entertainment (AA Live Operations)</h3>
+                <p class="mt-3 text-sm leading-6 text-brand-text">
+                  Gestión directa de vendors de QA externos y equipos de desarrollo distribuidos para Police Simulator: Patrol Officers. Definición y control riguroso de SLAs, KPIs de calidad y seguimiento desde Steam Beta hasta el lanzamiento global v1.0 y consolas.
+                </p>
+              </article>
+              <article class="fade-in rounded-2xl border border-[var(--card-border)] bg-white p-5 shadow-sm">
+                <h3 class="text-base font-semibold text-brand-primary">Stage Clear Studios (High-Volume Release OS)</h3>
+                <p class="mt-3 text-sm leading-6 text-brand-text">
+                  Liderazgo del plan global de QA y pipelines de producción para más de 50 títulos en PC, Mobile y Consolas. Control de ramas (branch builds), distribución vía Firebase y gestión completa de certificación First-Party (Sony TRC, Microsoft XR, Nintendo Lotcheck).
+                </p>
+              </article>
+            </div>
+          </section>
+        </section>
+
+        <section
+          id="panel-next-steps"
+          role="tabpanel"
+          aria-labelledby="tab-next-steps"
+          class="tab-panel"
+          data-active="false"
+        >
+          <div class="grid gap-6 xl:grid-cols-[1.1fr_0.9fr]">
+            <article class="fade-in rounded-3xl border border-[var(--card-border)] bg-white p-6 shadow-card">
               <div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
                 <div>
-                  <p class="text-sm uppercase tracking-[0.3em] text-autumn-clay">Master performance ownership</p>
-                  <h2 class="mt-2 text-3xl font-semibold text-autumn-ink">Core responsibilities by phase and expertise target</h2>
+                  <p class="text-xs font-semibold uppercase tracking-[0.2em] text-brand-secondary">Autonomía (0–12 meses)</p>
+                  <h2 class="mt-1 text-xl font-semibold text-brand-primary">Evolución de niveles de autonomía (Level 0 → Level 3)</h2>
                 </div>
-                <p class="max-w-sm text-sm leading-6 text-autumn-clay">
-                  Column H can be updated in the data object to reflect the expertise milestone expected for each phase.
-                </p>
               </div>
-              <div id="expertise-matrix" class="mt-8 grid gap-4"></div>
+              <div class="mt-5 h-[23rem] sm:h-[28rem]">
+                <canvas id="autonomy-chart" aria-label="Autonomy evolution chart"></canvas>
+              </div>
+              <p class="mt-4 text-sm leading-6 text-brand-text">
+                Nota: Los nombres de responsabilidades y valores de autonomía son editables en la constante
+                <code class="rounded bg-brand-bg px-1 py-0.5 text-brand-primary">CORE_RESPONSIBILITIES</code> dentro de
+                <code class="rounded bg-brand-bg px-1 py-0.5 text-brand-primary">assets/app.js</code>.
+              </p>
             </article>
 
-            <article class="rounded-[2rem] border border-[var(--card-border)] bg-white/75 p-8 shadow-soft backdrop-blur">
-              <p class="text-sm uppercase tracking-[0.3em] text-autumn-clay">Suggested enhancements</p>
-              <h2 class="mt-2 text-3xl font-semibold text-autumn-ink">Next improvements for the landing</h2>
-              <ul id="improvements-list" class="mt-6 space-y-4"></ul>
+            <article class="fade-in rounded-3xl border border-[var(--card-border)] bg-white p-6 shadow-card">
+              <p class="text-xs font-semibold uppercase tracking-[0.2em] text-brand-secondary">KPIs &amp; OKRs de impacto</p>
+              <div class="mt-4 space-y-3">
+                <article class="rounded-2xl border border-[var(--card-border)] bg-brand-bg p-4">
+                  <h3 class="font-semibold text-brand-primary">Autonomía Técnica e Integración en Playgami</h3>
+                  <p class="mt-2 text-sm text-brand-text">100% de mapa de herramientas en Mes 3.</p>
+                </article>
+                <article class="rounded-2xl border border-[var(--card-border)] bg-brand-bg p-4">
+                  <h3 class="font-semibold text-brand-primary">Excelencia en LiveOps QA y Control de Bugs Escapados</h3>
+                  <p class="mt-2 text-sm text-brand-text">-15% de incidencias en live para Mes 9.</p>
+                </article>
+                <article class="rounded-2xl border border-[var(--card-border)] bg-brand-bg p-4">
+                  <h3 class="font-semibold text-brand-primary">Liderazgo Transversal y Eficiencia de Vendors</h3>
+                  <p class="mt-2 text-sm text-brand-text">SLAs optimizados al 100% en Mes 6.</p>
+                </article>
+              </div>
             </article>
           </div>
+
+          <article class="mt-6 fade-in rounded-3xl border border-[var(--card-border)] bg-white p-6 shadow-card">
+            <p class="text-xs font-semibold uppercase tracking-[0.2em] text-brand-secondary">Timeline interactivo</p>
+            <div class="mt-4 space-y-3" id="timeline-accordion"></div>
+          </article>
         </section>
       </main>
     </div>
