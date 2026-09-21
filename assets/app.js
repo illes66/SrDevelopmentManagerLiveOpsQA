@@ -311,6 +311,20 @@ function normalizeRequirementsData(rows) {
   ]);
   const nextStepIndex = getHeaderIndex(headerMap, ['Next step to improve', 'Next Step to Improve']);
 
+  const requiredIndexes = [
+    requirementIndex,
+    relatedExperienceIndex,
+    companyIndex,
+    expertiseIndex,
+    improvementIndex,
+    nextStepIndex,
+    matchIndex
+  ];
+
+  if (requiredIndexes.some((index) => typeof index !== 'number' || index < 0)) {
+    return [];
+  }
+
   return dataRows
     .map((row) => {
       const requirement = String(row[requirementIndex] || '').trim();
