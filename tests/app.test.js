@@ -127,3 +127,24 @@ test('loadRequirementsData falls back when required headers are missing', async 
   assert.equal(state.requirements.length, LOCAL_REQUIREMENTS_DATA.length);
   assert.equal(state.requirements[0].requirement, LOCAL_REQUIREMENTS_DATA[0].requirement);
 });
+
+test('loadRequirementsData requests the gviz CSV endpoint for Experience&SkillsRequirements', async () => {
+  let requestedUrl = '';
+  const { loadRequirementsData } = loadApp(async (url) => {
+    requestedUrl = String(url);
+    return {
+      ok: true,
+      text: async () => [
+        'WhatScopelyIsLookingFor,,Description or Related Experience,Company,Level of Expertise 1/5',
+        '"Master Communicator",TRUE,"Executive-ready updates","2K Valencia","5 Master Experience"'
+      ].join('\n')
+    };
+  });
+
+  await loadRequirementsData();
+
+  assert.equal(
+    requestedUrl,
+    'https://docs.google.com/spreadsheets/d/1s4brBSwc4u_mzCe_CYXXnVgg_zkNF6yLLae-fMrhieE/gviz/tq?tqx=out:csv&sheet=Experience%26SkillsRequirements'
+  );
+});

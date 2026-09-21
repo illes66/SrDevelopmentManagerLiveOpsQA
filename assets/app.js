@@ -1,5 +1,5 @@
 const GOOGLE_SHEET_CSV_URL =
-  'https://docs.google.com/spreadsheets/d/e/2PACX-1vS5ON09VkHUkQNaQeIJe2vBUzHg1iU_Cy6KeC9rlKXuuxsegXyzJ9x-ENyFVM5b2XAeLRBVFyLwulNH/pub?output=csv';
+  'https://docs.google.com/spreadsheets/d/1s4brBSwc4u_mzCe_CYXXnVgg_zkNF6yLLae-fMrhieE/gviz/tq?tqx=out:csv&sheet=Experience%26SkillsRequirements';
 
 const LOCAL_REQUIREMENTS_DATA = [
   {
