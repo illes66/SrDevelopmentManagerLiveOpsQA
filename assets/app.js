@@ -1602,12 +1602,13 @@ async function loadNextStepsData() {
   state.timelinePhases = phaseResult.data;
   state.timelineTasks = taskResult.data;
   state.coreResponsibilities = responsibilityResult.data;
-  state.kpiItems = state.coreResponsibilities.length
-    ? state.coreResponsibilities.map((responsibility) => ({
-        title: responsibility.name,
-        detail: getKpiDetail(responsibility)
-      }))
-    : LOCAL_KPI_ITEMS;
+  state.kpiItems =
+    responsibilityResult.source === 'live'
+      ? state.coreResponsibilities.map((responsibility) => ({
+          title: responsibility.name,
+          detail: getKpiDetail(responsibility)
+        }))
+      : LOCAL_KPI_ITEMS;
 
   updateRoadmapState(getCombinedRoadmapSource(phaseResult.source, taskResult.source));
   renderTimelineAccordion(state.timelinePhases, state.timelineTasks, state.coreResponsibilities);
@@ -1719,6 +1720,12 @@ function registerTimelineEvents() {
     if (event.key === 'Home') targetIndex = 0;
     if (event.key === 'End') targetIndex = tabs.length - 1;
 
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      activateTimelinePhase(index);
+      return;
+    }
+
     if (targetIndex !== index) {
       event.preventDefault();
       tabs[targetIndex].focus();
@@ -1759,7 +1766,24 @@ function initSelectedExperienceRotator() {
   const toggleButton = document.getElementById('experience-rotation-toggle');
 
   if (container) {
-    const maxHeight = cards.reduce((height, card) => Math.max(height, card.offsetHeight || 0), 0);
+    cards.forEach((card) => {
+      card.style.position = 'static';
+      card.style.inset = 'auto';
+      card.style.visibility = 'hidden';
+      card.style.opacity = '0';
+      card.style.pointerEvents = 'none';
+    });
+
+    const maxHeight = cards.reduce((height, card) => Math.max(height, card.offsetHeight || card.scrollHeight || 0), 0);
+
+    cards.forEach((card) => {
+      card.style.position = '';
+      card.style.inset = '';
+      card.style.visibility = '';
+      card.style.opacity = '';
+      card.style.pointerEvents = '';
+    });
+
     if (maxHeight) container.style.minHeight = `${maxHeight}px`;
   }
 
