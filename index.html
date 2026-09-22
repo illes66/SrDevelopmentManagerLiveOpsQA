@@ -188,9 +188,16 @@
               <div class="mt-6">
                 <div class="flex items-center justify-between gap-3">
                   <h2 class="text-base font-semibold text-brand-primary">Selected Experience</h2>
-                  <p class="text-xs font-medium uppercase tracking-[0.18em] text-brand-secondary">Rotating highlights</p>
+                  <button
+                    id="experience-rotation-toggle"
+                    type="button"
+                    aria-pressed="false"
+                    class="focusable inline-flex items-center rounded-full border border-brand-primary/20 px-3 py-1 text-xs font-medium uppercase tracking-[0.18em] text-brand-primary transition hover:bg-brand-primary hover:text-white"
+                  >
+                    Pause rotation
+                  </button>
                 </div>
-                <div id="selected-experience-rotator" class="experience-rotator mt-4 min-h-[12rem]" aria-live="polite">
+                <div id="selected-experience-rotator" class="experience-rotator mt-4 min-h-[12rem]">
                   <article
                     data-rotating-experience="0"
                     class="experience-rotator__card rounded-2xl border border-[var(--card-border)] bg-brand-bg p-5 shadow-sm is-visible"

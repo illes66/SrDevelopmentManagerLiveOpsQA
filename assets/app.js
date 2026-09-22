@@ -1602,13 +1602,12 @@ async function loadNextStepsData() {
   state.timelinePhases = phaseResult.data;
   state.timelineTasks = taskResult.data;
   state.coreResponsibilities = responsibilityResult.data;
-  state.kpiItems =
-    responsibilityResult.source === 'live'
-      ? responsibilityResult.data.map((responsibility) => ({
-          title: responsibility.name,
-          detail: getKpiDetail(responsibility)
-        }))
-      : LOCAL_KPI_ITEMS;
+  state.kpiItems = state.coreResponsibilities.length
+    ? state.coreResponsibilities.map((responsibility) => ({
+        title: responsibility.name,
+        detail: getKpiDetail(responsibility)
+      }))
+    : LOCAL_KPI_ITEMS;
 
   updateRoadmapState(getCombinedRoadmapSource(phaseResult.source, taskResult.source));
   renderTimelineAccordion(state.timelinePhases, state.timelineTasks, state.coreResponsibilities);
@@ -1696,7 +1695,13 @@ function registerTabEvents() {
 
 function registerTimelineEvents() {
   timelineAccordion?.addEventListener('click', (event) => {
-    const trigger = event.target.closest('[data-timeline-index]');
+    const target =
+      event.target && typeof event.target.closest === 'function'
+        ? event.target
+        : event.target?.parentElement && typeof event.target.parentElement.closest === 'function'
+          ? event.target.parentElement
+          : null;
+    const trigger = target?.closest('[data-timeline-index]');
     if (!trigger) return;
 
     activateTimelinePhase(Number(trigger.dataset.timelineIndex));
@@ -1751,29 +1756,56 @@ function initSelectedExperienceRotator() {
   if (!cards.length) return;
 
   const container = document.getElementById('selected-experience-rotator');
+  const toggleButton = document.getElementById('experience-rotation-toggle');
+
   if (container) {
     const maxHeight = cards.reduce((height, card) => Math.max(height, card.offsetHeight || 0), 0);
     if (maxHeight) container.style.minHeight = `${maxHeight}px`;
   }
 
   let activeIndex = 0;
-  cards.forEach((card, index) => {
-    card.classList.toggle('is-visible', index === activeIndex);
-    card.setAttribute('aria-hidden', String(index !== activeIndex));
-  });
+  let paused = false;
 
-  if (experienceRotatorInterval) {
-    clearInterval(experienceRotatorInterval);
-  }
-
-  experienceRotatorInterval = setInterval(() => {
-    activeIndex = (activeIndex + 1) % cards.length;
+  function renderActiveCard() {
     cards.forEach((card, index) => {
       const active = index === activeIndex;
       card.classList.toggle('is-visible', active);
       card.setAttribute('aria-hidden', String(!active));
     });
-  }, 5000);
+  }
+
+  function stopRotation() {
+    if (experienceRotatorInterval) {
+      clearInterval(experienceRotatorInterval);
+      experienceRotatorInterval = undefined;
+    }
+  }
+
+  function startRotation() {
+    stopRotation();
+    if (paused || cards.length < 2) return;
+
+    experienceRotatorInterval = setInterval(() => {
+      activeIndex = (activeIndex + 1) % cards.length;
+      renderActiveCard();
+    }, 5000);
+  }
+
+  renderActiveCard();
+  startRotation();
+
+  toggleButton?.addEventListener('click', () => {
+    paused = !paused;
+    toggleButton.textContent = paused ? 'Resume rotation' : 'Pause rotation';
+    toggleButton.setAttribute('aria-pressed', String(paused));
+
+    if (paused) {
+      stopRotation();
+      return;
+    }
+
+    startRotation();
+  });
 }
 
 function init() {
