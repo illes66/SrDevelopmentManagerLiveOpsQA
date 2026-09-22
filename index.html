@@ -74,6 +74,25 @@
         transform: translateY(0);
       }
 
+      .experience-rotator {
+        position: relative;
+      }
+
+      .experience-rotator__card {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(8px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+      }
+
+      .experience-rotator__card.is-visible {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+      }
+
       .focusable:focus-visible {
         outline: 3px solid var(--focus-ring);
         outline-offset: 2px;
@@ -113,31 +132,6 @@
                   GitHub Portfolio
                   <span aria-hidden="true">↗</span>
                   <span class="sr-only">(opens in a new tab)</span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://docs.google.com/spreadsheets/d/e/2PACX-1vS5ON09VkHUkQNaQeIJe2vBUzHg1iU_Cy6KeC9rlKXuuxsegXyzJ9x-ENyFVM5b2XAeLRBVFyLwulNH/pub?output=csv"
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label="Open the public Google Sheets CSV data in a new tab"
-                  class="focusable inline-flex w-full items-center justify-center gap-2 rounded-full border border-brand-primary/20 bg-white px-3 py-2 text-sm font-medium text-brand-primary transition hover:bg-brand-primary hover:text-white"
-                >
-                  <i data-lucide="sheet" class="h-4 w-4"></i>
-                  Google Sheet Data
-                  <span aria-hidden="true">↗</span>
-                  <span class="sr-only">(opens in a new tab)</span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  data-placeholder-link="true"
-                  aria-label="Scopely job specification placeholder link"
-                  class="focusable inline-flex w-full items-center justify-center gap-2 rounded-full border border-brand-primary/20 bg-white px-3 py-2 text-sm font-medium text-brand-primary transition hover:bg-brand-primary hover:text-white"
-                >
-                  <i data-lucide="clipboard-list" class="h-4 w-4"></i>
-                  Scopely Job Specification
                 </a>
               </li>
             </ul>
@@ -191,6 +185,33 @@
               <p class="mt-4 text-base leading-7 text-brand-text sm:text-lg" id="hero-text">
                 Senior Game Producer &amp; Development Manager with more than 9 years of experience leading multidisciplinary teams of 35+ people across AAA, AA, and mobile/console porting initiatives. With a strong technical foundation in C# and Unity programming, I act as a seamless bridge between engineering, creative design, and executive leadership. I specialize in building quality operating systems, optimizing delivery pipelines, and strategically managing external partners.
               </p>
+              <div class="mt-6">
+                <div class="flex items-center justify-between gap-3">
+                  <h2 class="text-base font-semibold text-brand-primary">Selected Experience</h2>
+                  <p class="text-xs font-medium uppercase tracking-[0.18em] text-brand-secondary">Rotating highlights</p>
+                </div>
+                <div id="selected-experience-rotator" class="experience-rotator mt-4 min-h-[12rem]" aria-live="polite">
+                  <article
+                    data-rotating-experience="0"
+                    class="experience-rotator__card rounded-2xl border border-[var(--card-border)] bg-brand-bg p-5 shadow-sm is-visible"
+                  >
+                    <h3 class="text-base font-semibold text-brand-primary">2K Valencia + Stage Clear Studios</h3>
+                    <p class="mt-3 text-sm leading-6 text-brand-text">
+                      From 2K Valencia’s AAA multi-studio support to Stage Clear Studios’ 50+ title release operating system, the through-line is scaling delivery, tooling, dashboards, certification, and partner alignment across complex production pipelines.
+                    </p>
+                  </article>
+                  <article
+                    data-rotating-experience="1"
+                    class="experience-rotator__card rounded-2xl border border-[var(--card-border)] bg-brand-bg p-5 shadow-sm"
+                    aria-hidden="true"
+                  >
+                    <h3 class="text-base font-semibold text-brand-primary">Astragon Entertainment</h3>
+                    <p class="mt-3 text-sm leading-6 text-brand-text">
+                      At Astragon, direct ownership of distributed development teams and external QA vendors for Police Simulator: Patrol Officers sharpened SLA management, milestone reporting, launch readiness, and post-launch LiveOps coordination.
+                    </p>
+                  </article>
+                </div>
+              </div>
             </article>
 
             <article class="fade-in rounded-3xl border border-[var(--card-border)] bg-white p-6 shadow-card">
@@ -214,29 +235,6 @@
             </article>
           </div>
 
-          <section class="mt-6">
-            <h2 class="text-xl font-semibold text-brand-primary">Selected Experience</h2>
-            <div class="mt-4 grid gap-4 lg:grid-cols-3">
-              <article class="fade-in rounded-2xl border border-[var(--card-border)] bg-white p-5 shadow-sm">
-                <h3 class="text-base font-semibold text-brand-primary">2K Valencia (AAA &amp; Central Support)</h3>
-                <p class="mt-3 text-sm leading-6 text-brand-text">
-                  Strategic alignment across development teams, Central Tech, and external QA partners for AAA titles, including Project Ethos with 31st Union. Designed and implemented automated Jira/Excel dashboards for capacity forecasting, risk metrics, and early bottleneck resolution.
-                </p>
-              </article>
-              <article class="fade-in rounded-2xl border border-[var(--card-border)] bg-white p-5 shadow-sm">
-                <h3 class="text-base font-semibold text-brand-primary">Astragon Entertainment (AA Live Operations)</h3>
-                <p class="mt-3 text-sm leading-6 text-brand-text">
-                  Direct management of external QA vendors and distributed development teams for Police Simulator: Patrol Officers. Defined and rigorously tracked SLAs, quality KPIs, and milestone progress from Steam Beta through the global v1.0 launch and console releases.
-                </p>
-              </article>
-              <article class="fade-in rounded-2xl border border-[var(--card-border)] bg-white p-5 shadow-sm">
-                <h3 class="text-base font-semibold text-brand-primary">Stage Clear Studios (High-Volume Release OS)</h3>
-                <p class="mt-3 text-sm leading-6 text-brand-text">
-                  Led the global QA plan and production pipelines for more than 50 PC, mobile, and console titles. Oversaw branch builds, Firebase distribution, and full first-party certification management, including Sony TRC, Microsoft XR, and Nintendo Lotcheck.
-                </p>
-              </article>
-            </div>
-          </section>
 
           <article class="mt-6 fade-in rounded-3xl border border-[var(--card-border)] bg-white p-6 shadow-card">
             <div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
@@ -287,26 +285,19 @@
 
             <article class="fade-in rounded-3xl border border-[var(--card-border)] bg-white p-6 shadow-card">
               <p class="text-xs font-semibold uppercase tracking-[0.2em] text-brand-secondary">Impact KPIs &amp; OKRs</p>
-              <div class="mt-4 space-y-3">
-                <article class="rounded-2xl border border-[var(--card-border)] bg-brand-bg p-4">
-                  <h3 class="font-semibold text-brand-primary">Technical Autonomy and Playgami Integration</h3>
-                  <p class="mt-2 text-sm text-brand-text">100% toolchain mapping completed by Month 3.</p>
-                </article>
-                <article class="rounded-2xl border border-[var(--card-border)] bg-brand-bg p-4">
-                  <h3 class="font-semibold text-brand-primary">LiveOps QA Excellence and Escaped Defect Control</h3>
-                  <p class="mt-2 text-sm text-brand-text">Reduce live incidents by 15% by Month 9.</p>
-                </article>
-                <article class="rounded-2xl border border-[var(--card-border)] bg-brand-bg p-4">
-                  <h3 class="font-semibold text-brand-primary">Cross-Functional Leadership and Vendor Efficiency</h3>
-                  <p class="mt-2 text-sm text-brand-text">Achieve 100% optimized vendor SLAs by Month 6.</p>
-                </article>
-              </div>
+              <p id="kpi-status" role="status" aria-live="polite" class="mt-2 text-sm text-brand-text">
+                Loading KPI/OKR focus areas from the live Google Sheet…
+              </p>
+              <div class="mt-4 space-y-3" id="kpi-list"></div>
             </article>
           </div>
 
           <article class="mt-6 fade-in rounded-3xl border border-[var(--card-border)] bg-white p-6 shadow-card">
             <p class="text-xs font-semibold uppercase tracking-[0.2em] text-brand-secondary">Interactive Roadmap</p>
-            <div class="mt-4 space-y-3" id="timeline-accordion"></div>
+            <p id="timeline-status" role="status" aria-live="polite" class="mt-2 text-sm text-brand-text">
+              Loading roadmap phases and tasks from the live Google Sheet…
+            </p>
+            <div class="mt-4" id="timeline-accordion"></div>
           </article>
         </section>
       </main>
