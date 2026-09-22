@@ -954,6 +954,7 @@ function normalizeCoreResponsibilities(rows) {
 
   const responsibilityIndex = getHeaderIndex(headerMap, [
     'CoreResponsabilities',
+    'CoreResponsibilities',
     'Core Responsibilities',
     'Core Responsibility'
   ]);
