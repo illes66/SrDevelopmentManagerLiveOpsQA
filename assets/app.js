@@ -970,6 +970,22 @@ function normalizeCoreResponsibilities(rows) {
   );
 }
 
+function reconcileResponsibilitiesWithTasks(responsibilities, tasks) {
+  const knownNames = new Set(responsibilities.map((item) => normalizeNameKey(item.name)));
+  const missing = [];
+
+  tasks.forEach((task) => {
+    task.responsibilities.forEach((name) => {
+      const normalized = normalizeNameKey(name);
+      if (!normalized || knownNames.has(normalized)) return;
+      knownNames.add(normalized);
+      missing.push({ name });
+    });
+  });
+
+  return missing.length ? mergeCoreResponsibilities([...responsibilities, ...missing]) : responsibilities;
+}
+
 function createElement(tagName, className, text) {
   const element = document.createElement(tagName);
   if (className) element.className = className;
@@ -1568,9 +1584,10 @@ async function loadRequirementsData() {
   return result;
 }
 
-function getCombinedRoadmapSource(phaseSource, taskSource) {
-  if (phaseSource === 'live' && taskSource === 'live') return 'live';
-  if (phaseSource === 'fallback' && taskSource === 'fallback') return 'fallback';
+function getCombinedRoadmapSource(phaseSource, taskSource, responsibilitySource) {
+  const sources = [phaseSource, taskSource, responsibilitySource];
+  if (sources.every((source) => source === 'live')) return 'live';
+  if (sources.every((source) => source === 'fallback')) return 'fallback';
   return 'mixed';
 }
 
@@ -1601,7 +1618,7 @@ async function loadNextStepsData() {
 
   state.timelinePhases = phaseResult.data;
   state.timelineTasks = taskResult.data;
-  state.coreResponsibilities = responsibilityResult.data;
+  state.coreResponsibilities = reconcileResponsibilitiesWithTasks(responsibilityResult.data, state.timelineTasks);
   state.kpiItems =
     responsibilityResult.source === 'live'
       ? state.coreResponsibilities.map((responsibility) => ({
@@ -1610,7 +1627,9 @@ async function loadNextStepsData() {
         }))
       : LOCAL_KPI_ITEMS;
 
-  updateRoadmapState(getCombinedRoadmapSource(phaseResult.source, taskResult.source));
+  updateRoadmapState(
+    getCombinedRoadmapSource(phaseResult.source, taskResult.source, responsibilityResult.source)
+  );
   renderTimelineAccordion(state.timelinePhases, state.timelineTasks, state.coreResponsibilities);
   renderKpiCards(state.kpiItems, responsibilityResult.source);
   renderVisibleCharts();
@@ -1728,8 +1747,10 @@ function registerTimelineEvents() {
 
     if (targetIndex !== index) {
       event.preventDefault();
+      tabs.forEach((tab, tabIndex) => {
+        tab.tabIndex = tabIndex === targetIndex ? 0 : -1;
+      });
       tabs[targetIndex].focus();
-      activateTimelinePhase(targetIndex);
     }
   });
 }

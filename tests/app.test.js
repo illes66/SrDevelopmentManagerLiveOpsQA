@@ -212,9 +212,9 @@ test('loadNextStepsData falls back per section instead of failing everything', a
   assert.equal(state.roadmapSource, 'mixed');
   assert.equal(state.timelinePhases[0].phaseKey, 'Phase 0');
   assert.equal(state.timelineTasks.length, LOCAL_TIMELINE_TASKS.length);
-  assert.equal(
-    state.coreResponsibilities.map((item) => item.name).join(' | '),
-    'Drive Strategic Alignment | Optimize External Partnerships'
-  );
+  const responsibilityNames = state.coreResponsibilities.map((item) => item.name);
+  assert.equal(responsibilityNames[0], 'Drive Strategic Alignment');
+  assert.equal(responsibilityNames[1], 'Optimize External Partnerships');
+  assert.ok(responsibilityNames.includes('End-to-End LiveOps Quality & Performance'));
   assert.equal(state.kpiItems[0].title, 'Drive Strategic Alignment');
 });
