@@ -1164,6 +1164,17 @@ function renderTimelineAccordion(phases, tasks, responsibilities) {
 
   timelineAccordion.replaceChildren();
 
+  if (!phases.length) {
+    timelineAccordion.append(
+      createElement(
+        'p',
+        'rounded-2xl border border-dashed border-brand-primary/20 bg-brand-bg p-4 text-sm leading-6 text-brand-text',
+        'No roadmap phases are available from the current data source.'
+      )
+    );
+    return;
+  }
+
   const safePhaseIndex = Math.min(state.activeTimelinePhase, Math.max(phases.length - 1, 0));
   state.activeTimelinePhase = safePhaseIndex;
 
@@ -1747,10 +1758,8 @@ function registerTimelineEvents() {
 
     if (targetIndex !== index) {
       event.preventDefault();
-      tabs.forEach((tab, tabIndex) => {
-        tab.tabIndex = tabIndex === targetIndex ? 0 : -1;
-      });
       tabs[targetIndex].focus();
+      activateTimelinePhase(targetIndex);
     }
   });
 }
